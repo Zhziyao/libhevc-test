@@ -57,7 +57,7 @@
 #include <emmintrin.h>
 #include <smmintrin.h>
 #include <immintrin.h>
-
+#include <stdio.h>
 
 /****************************************************************************/
 /* Constant Macros                                                          */
@@ -126,7 +126,7 @@ void ihevc_intra_pred_chroma_planar_sse42(UWORD8 *pu1_ref,
                                           WORD32 nt,
                                           WORD32 mode)
 {
-
+    printf("common/x86/ihevc_intra_pred_chroma_planar_sse42\n");
     WORD32 row, col;
     WORD32 log2nt = 5;
     WORD32 two_nt, three_nt;
@@ -280,7 +280,7 @@ void ihevc_intra_pred_chroma_dc_sse42(UWORD8 *pu1_ref,
                                       WORD32 nt,
                                       WORD32 mode)
 {
-
+printf("common/x86/ihevc_intra_pred_chroma_planar_sse42\n");
     WORD32 acc_dc_u, acc_dc_v;
     WORD32 dc_val_u, dc_val_v;
     WORD32 row;

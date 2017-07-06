@@ -59,7 +59,7 @@
 #include <emmintrin.h>
 #include <smmintrin.h>
 #include <tmmintrin.h>
-
+#include <stdio.h>
 /*****************************************************************************/
 /* Function Definitions                                                      */
 /*****************************************************************************/
@@ -114,6 +114,7 @@ void ihevc_inter_pred_luma_copy_w16out_sse42(UWORD8 *pu1_src,
                                              WORD32 ht,
                                              WORD32 wd)
 {
+    printf("common/x86/ihevc_inter_pred_luma_copy_w16out_sse42\n");
     WORD32 row, col;
     __m128i  src0_16x8b, src1_16x8b, src2_16x8b, src3_16x8b;
     UNUSED(pi1_coeff);
@@ -241,6 +242,8 @@ void ihevc_inter_pred_chroma_copy_sse42(UWORD8 *pu1_src,
                                         WORD32 ht,
                                         WORD32 wd)
 {
+    printf("common/x86/ihevc_inter_pred_luma_copy_w16out_sse42\n");
+
     WORD32 row, col, wdx2;
     __m128i  src0_16x8b, src1_16x8b, src2_16x8b, src3_16x8b;
 
@@ -462,6 +465,8 @@ void ihevc_inter_pred_chroma_copy_w16out_sse42(UWORD8 *pu1_src,
                                                WORD32 ht,
                                                WORD32 wd)
 {
+    printf("common/x86/ihevc_inter_pred_luma_copy_w16out_sse42\n");
+
     WORD32 row, col, wdx2;
     __m128i  src0_16x8b, src1_16x8b, src2_16x8b, src3_16x8b;
 

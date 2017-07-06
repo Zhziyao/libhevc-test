@@ -115,6 +115,7 @@ void ihevc_itrans_recon_16x16_sse42(WORD16 *pi2_src,
                                     WORD32 zero_cols,
                                     WORD32 zero_rows)
 {
+    printf("common/x86/ihevc_itrans_recon_16x16_sse42\n");
     __m128i m_temp_reg_0;
     __m128i m_temp_reg_1;
     __m128i m_temp_reg_10;

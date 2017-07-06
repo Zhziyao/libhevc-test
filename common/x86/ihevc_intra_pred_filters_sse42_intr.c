@@ -59,7 +59,7 @@
 #include "ihevc_tables_x86_intr.h"
 
 #include <immintrin.h>
-
+#include <stdio.h>
 /****************************************************************************/
 /* Constant Macros                                                          */
 /****************************************************************************/
@@ -124,6 +124,8 @@ void ihevc_intra_pred_ref_filtering_sse42(UWORD8 *pu1_src,
                                           WORD32 mode,
                                           WORD32 strong_intra_smoothing_enable_flag)
 {
+    printf("common/x86/ihevc_intra_pred_ref_filtering_sse42\n");
+
     WORD32 filter_flag;
     WORD32 i; /* Generic indexing variable */
     WORD32 four_nt = 4 * nt;
