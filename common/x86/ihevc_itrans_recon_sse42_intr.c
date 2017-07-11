@@ -118,7 +118,6 @@ void ihevc_itrans_recon_4x4_ttype1_sse42(WORD16 *pi2_src,
                                          WORD32 zero_cols,
                                          WORD32 zero_rows)
 {
-    printf("common/x86/ihevc_intra_pred_ref_filtering_sse42\n");
     __m128i m_temp_reg_0;
     __m128i m_temp_reg_1;
     __m128i m_temp_reg_2;
@@ -450,7 +449,7 @@ void ihevc_itrans_recon_4x4_sse42(WORD16 *pi2_src,
                                   WORD32 zero_rows)
 {
 
-printf("common/x86/ihevc_intra_pred_ref_filtering_sse42\n");
+
     __m128i m_temp_reg_0;
     __m128i m_temp_reg_1;
     __m128i m_temp_reg_2;
@@ -779,7 +778,6 @@ void ihevc_itrans_recon_8x8_sse42(WORD16 *pi2_src,
                                   WORD32 zero_cols,
                                   WORD32 zero_rows)
 {
-    printf("common/x86/ihevc_intra_pred_ref_filtering_sse42\n");
     __m128i m_temp_reg_0;
     __m128i m_temp_reg_1;
     __m128i m_temp_reg_2;

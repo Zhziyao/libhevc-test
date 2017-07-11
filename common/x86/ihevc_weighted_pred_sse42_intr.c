@@ -119,7 +119,6 @@ void ihevc_weighted_pred_uni_sse42(WORD16 *pi2_src,
                                    WORD32 ht,
                                    WORD32 wd)
 {
-    printf("common/x86/ihevc_weighted_pred_uni_sse42\n");
     WORD32 row, col, temp;
     WORD32 dst0, dst1, dst2, dst3;
 
@@ -421,7 +420,6 @@ void ihevc_weighted_pred_chroma_uni_sse42(WORD16 *pi2_src,
                                           WORD32 ht,
                                           WORD32 wd)
 {
-        printf("common/x86/ihevc_weighted_pred_uni_sse42\n");
     WORD32 row, col, temp, wdx2;
     /* all 128 bit registers are named with a suffix mxnb, where m is the */
     /* number of n bits packed in the register                            */
@@ -1262,7 +1260,6 @@ void ihevc_weighted_pred_bi_sse42(WORD16 *pi2_src1,
                                   WORD32 ht,
                                   WORD32 wd)
 {
-        printf("common/x86/ihevc_weighted_pred_uni_sse42\n");
     WORD32 row, col, temp;
 
     __m128i src_temp1_4x32b, src_temp2_4x32b, src_temp3_4x32b, src_temp4_4x32b;
@@ -1536,7 +1533,6 @@ void ihevc_weighted_pred_chroma_bi_sse42(WORD16 *pi2_src1,
                                          WORD32 ht,
                                          WORD32 wd)
 {
-        printf("common/x86/ihevc_weighted_pred_uni_sse42\n");
     WORD32 row, col, temp1, temp2;
     WORD32 wdx2;
 
@@ -1793,7 +1789,6 @@ void ihevc_weighted_pred_bi_default_sse42(WORD16 *pi2_src1,
                                           WORD32 ht,
                                           WORD32 wd)
 {
-        printf("common/x86/ihevc_weighted_pred_uni_sse42\n");
     WORD32 row, col, temp;
     WORD32 shift;
 
