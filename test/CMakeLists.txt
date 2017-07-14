@@ -18,8 +18,8 @@ LINK_DIRECTORIES (
 
 ADD_DEFINITIONS (${CMAKE_C_FLAGS})
 
-ADD_EXECUTABLE (hevctest ${hevctest_src_files})
+ADD_EXECUTABLE (hevcdecode ${hevctest_src_files})
 
-TARGET_LINK_LIBRARIES (hevctest hevcdev pthread)
+TARGET_LINK_LIBRARIES (hevcdecode hevcdev pthread)
 
-SET (EXECUTABLE_OUTPUT_PATH ${libhevc_top_srcdir}/test/decoder)
+SET (EXECUTABLE_OUTPUT_PATH ${libhevc_top_srcdir})
