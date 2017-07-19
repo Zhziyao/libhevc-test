@@ -15,10 +15,12 @@ import string
 import subprocess
 import argparse
 
-
+h264test = False
+h265test = False
 libhevc = False
 libffmpeg = False
-libmedia = False
+libmediasw = False
+libmediahw = False
 libmpeg2 = False
 libavc = False
 testNum = 0
@@ -27,14 +29,16 @@ coreArc = ''
 curDirPath = ''
 hevcFpsNum = 0
 ffmpegFpsNum = 0
-msdkFpsNum = 0
+msdkswFpsNum = 0
+msdkhwFpsNum = 0
 avcFpsNum = 0
 mpeg2FpsNum = 0
 libhevcTestParas = ['./hevcdecode -i', ' --arch X86_', ' --num_cores ',' --soc GENERIC --num_frames -1 -s 0']
 libavcTestParas = [ 'avcdecode -i', ' --arch X86_', ' --num_cores ',' --soc GENERIC --num_frames -1 -s 0']
 libmpeg2TestParas = [ 'mpeg2decode -i' ' --arch X86_', ' --num_cores ',' --soc GENERIC --num_frames -1 -s 0']
 libffmpegParas = ['ffmpeg -y -i ', 'decodetest/null.yuv']
-libmsdkParas = 'sample_decode h265 -sw -i '
+libmsdkswParas = ['sample_decode ', ' h265 ', ' h264 ', ' -sw -i ']
+libmsdkhwParas = ['sample_decode ', ' h265 ', ' h264 ', ' -i ']
 testSaveDir = 'decodetest'
 testFile = ' cin.hevc '
 
@@ -42,7 +46,7 @@ testFile = ' cin.hevc '
 def cmdProcess():
 	global libhevc 
 	global libffmpeg
-	global libmedia 
+	global libmediasw 
 	global testNum 
 	global coreNum 
 	global coreArc 
@@ -62,12 +66,18 @@ def cmdProcess():
 		libhevc = True
 	if 'f' in args.libfortest:
 		libffmpeg = True
-	if 'm' in args.libfortest:
-		libmedia = True
+	if 's' in args.libfortest:
+		libmediasw = True
 	if 'a' in args.libfortest:
 		libavc = True
 	if '2' in args.libfortest:
 		libmpeg2 = True
+	if 'w' in args.libfortest:
+		libmediahw = True
+	if '4' in args.libfortest:
+		h264test = True
+	if '5' in args.libfortest:
+		h265test = True
 	if args.testloop > 0:
 		testNum = args.testloop
 	if args.core_num:
@@ -109,9 +119,9 @@ def createTestResult():
 			f.write(outputdata)
 			f.close()
 			j += 1
-	if libmedia:
+	if libmediasw:
 		print 'get in libmsdk'
-		testCmd = libmsdkParas + testFile
+		testCmd = libmsdkswParas + testFile
 		print testCmd
 		k = 0
 		while k < testNum:
@@ -171,7 +181,7 @@ def createTestResult():
 def calculateFps():
 	global hevcFpsNum
 	global ffmpegFpsNum
-	global msdkFpsNum
+	global msdkswFpsNum
 	testSaveFiles = os.listdir('decodetest')
 	#testSaveFiles = os.listdir('/home/snow/dpwu/libhevc-test/decodetest')
 	x = 1
@@ -202,9 +212,9 @@ def calculateFps():
 			resultLines = f.readlines()
 			fpsNumLine = resultLines[-2]
 			begin = fpsNumLine.rfind(', fps:')+6
-			msdkFpsNum += float(fpsNumLine[begin : begin + 8])
+			msdkswFpsNum += float(fpsNumLine[begin : begin + 8])
 			f.close()
-			print('the %dth loop average fps of mesdk is %.2f' % (z, msdkFpsNum / z))
+			print('the %dth loop average fps of mesdk is %.2f' % (z, msdkswFpsNum / z))
 			z += 1
 		elif 'avcdecode' in file :
 			f = open('decodetest/' + file)
@@ -231,7 +241,7 @@ calculateFps()
 
 averageHevcFps = hevcFpsNum / testNum
 averageFfmpegFps = ffmpegFpsNum / testNum 
-averageMsdkFps = msdkFpsNum / testNum
+averageMsdkFps = msdkswFpsNum / testNum
 averageAvcFps = avcFpsNum / testNum
 averageMpeg2Fps = mpeg2FpsNum / testNum
 

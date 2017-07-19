@@ -1,7 +1,11 @@
 #!/bin/bash
+#
 
-rm hevcres.txt
-rm ffmpegres.txt
+if [ -f hevcres.txt ]; then
+	echo ' former test res files exist and will be removed'
+	rm hevcres.txt
+	rm ffmpegres.txt
+fi
 
 #LIBHEVC TEST
 echo "hevcttest: -arc ssse3 core 1"

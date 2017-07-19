@@ -8,4 +8,4 @@ export PATH=/root/zzy/libavc-test:/root/zzy/libhevc-test:/root/zzy/libmpeg2-test
 
 echo "build test env PATH"
 
-echo 'the test PATH is ${PATH}'
+echo "the test PATH is ${PATH}"
