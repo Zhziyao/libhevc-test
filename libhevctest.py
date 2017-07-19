@@ -37,8 +37,7 @@ libhevcTestParas = ['./hevcdecode -i', ' --arch X86_', ' --num_cores ',' --soc G
 libavcTestParas = [ 'avcdecode -i', ' --arch X86_', ' --num_cores ',' --soc GENERIC --num_frames -1 -s 0']
 libmpeg2TestParas = [ 'mpeg2decode -i' ' --arch X86_', ' --num_cores ',' --soc GENERIC --num_frames -1 -s 0']
 libffmpegParas = ['ffmpeg -y -i ', 'decodetest/null.yuv']
-libmsdkswParas = ['sample_decode ', ' h265 ', ' h264 ', ' -sw -i ']
-libmsdkhwParas = ['sample_decode ', ' h265 ', ' h264 ', ' -i ']
+libmsdkParas = ['sample_decode ', ' h265 ', ' h264 ', ' -sw -i ', ' -hw -i ']
 testSaveDir = 'decodetest'
 testFile = ' cin.hevc '
 
@@ -52,6 +51,8 @@ def cmdProcess():
 	global coreArc 
 	global libmpeg2 
 	global libavc 
+	global h264test
+	global h265test
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-lib", "--libfortest", required = True,
 		help = "set the test libraries during the test")
@@ -121,12 +122,33 @@ def createTestResult():
 			j += 1
 	if libmediasw:
 		print 'get in libmsdk'
-		testCmd = libmsdkswParas + testFile
+		if h265test:
+			testCmd = libmsdkParas[0] + libmsdkParas[1] + libmsdkParas[3] + testFile
+		elif h264test:
+			testCmd = libmsdkParas[0] + libmsdkParas[2] + libmsdkParas[3] + testFile
 		print testCmd
 		k = 0
 		while k < testNum:
-			testResFile = 'decodetest/'+'msdkdecode' + str(k)+'.txt'
-			print('this is the %d test of msdkdecode' % k)
+			testResFile = 'decodetest/'+'msdkdecodesw' + str(k)+'.txt'
+			print('this is the %d test of msdkdecodesw' % k)
+			os.system('touch '+testResFile)
+			r = subprocess.Popen(testCmd, stdout=subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
+			(outputdata ,errdata)= r.communicate()
+			f = open( testResFile, 'w')
+			f.write(outputdata)
+			f.close()
+			k += 1
+	if libmediahw:
+		print 'get in libmsdk'
+		if h265test:
+			testCmd = libmsdkParas[0] + libmsdkParas[1] + libmsdkParas[4] + testFile
+		elif h264test:
+			testCmd = libmsdkParas[0] + libmsdkParas[2] + libmsdkParas[4] + testFile
+		print testCmd
+		k = 0
+		while k < testNum:
+			testResFile = 'decodetest/'+'msdkdecodehw' + str(k)+'.txt'
+			print('this is the %d test of msdkdecodehw' % k)
 			os.system('touch '+testResFile)
 			r = subprocess.Popen(testCmd, stdout=subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
 			(outputdata ,errdata)= r.communicate()
@@ -182,6 +204,9 @@ def calculateFps():
 	global hevcFpsNum
 	global ffmpegFpsNum
 	global msdkswFpsNum
+	global msdkhwFpsNum
+	global avcFpsNum
+	global mpeg2FpsNum
 	testSaveFiles = os.listdir('decodetest')
 	#testSaveFiles = os.listdir('/home/snow/dpwu/libhevc-test/decodetest')
 	x = 1
@@ -189,6 +214,7 @@ def calculateFps():
 	z = 1
 	ax = 1
 	m2 = 1
+	hz = 1
 	for file in testSaveFiles :
 		if 'hevcdecode' in file :
 			f = open('decodetest/' + file)
@@ -207,15 +233,24 @@ def calculateFps():
 			f.close()
 			print('the %dth loop average fps of ffmpeg is %.2f' % (m, ffmpegFpsNum / m))
 			m += 1
-		elif 'msdkdecode' in file:
+		elif 'msdkdecodesw' in file:
 			f = open('decodetest/' + file)
 			resultLines = f.readlines()
 			fpsNumLine = resultLines[-2]
 			begin = fpsNumLine.rfind(', fps:')+6
 			msdkswFpsNum += float(fpsNumLine[begin : begin + 8])
 			f.close()
-			print('the %dth loop average fps of mesdk is %.2f' % (z, msdkswFpsNum / z))
+			print('the %dth loop average fps of mesdksw is %.2f' % (z, msdkswFpsNum / z))
 			z += 1
+		elif 'msdkdecodehw' in file:
+			f = open('decodetest/' + file)
+			resultLines = f.readlines()
+			fpsNumLine = resultLines[-2]
+			begin = fpsNumLine.rfind(', fps:')+6
+			msdkhwFpsNum += float(fpsNumLine[begin : begin + 8])
+			f.close()
+			print('the %dth loop average fps of mesdkhw is %.2f' % (z, msdkhwFpsNum / hz))
+			hz += 1
 		elif 'avcdecode' in file :
 			f = open('decodetest/' + file)
 			resultLines = f.readlines()
@@ -241,14 +276,15 @@ calculateFps()
 
 averageHevcFps = hevcFpsNum / testNum
 averageFfmpegFps = ffmpegFpsNum / testNum 
-averageMsdkFps = msdkswFpsNum / testNum
+averageMsdkswFps = msdkswFpsNum / testNum
 averageAvcFps = avcFpsNum / testNum
 averageMpeg2Fps = mpeg2FpsNum / testNum
 
 print("\n")
 print('HevcFps is %.2f' % averageHevcFps)
 print('FfmpegFps is %.2f' % averageFfmpegFps)
-print('MsdkFps is %.2f' % averageMsdkFps)
+print('MsdkswFps is %.2f' % averageMsdkswFps)
+print('MsdkhwFps is %.2f' % averageMsdkhwFps)
 print('AvcFps is %.2f' % averageAvcFps)
 print('Mpeg2Fps is %.2f' % averageMpeg2Fps)
 
