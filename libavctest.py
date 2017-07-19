@@ -46,6 +46,7 @@ def cmdProcess():
 	global libhevc 
 	global libffmpeg
 	global libmediasw 
+	global libmediahw
 	global testNum 
 	global coreNum 
 	global coreArc 
