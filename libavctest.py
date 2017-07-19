@@ -238,7 +238,7 @@ def calculateFps():
 			resultLines = f.readlines()
 			fpsNumLine = resultLines[-2]
 			begin = fpsNumLine.rfind(', fps:')+6
-			msdkswFpsNum += float(fpsNumLine[begin : begin + 8])
+			msdkswFpsNum += float(fpsNumLine[begin : begin + 7])
 			f.close()
 			print('the %dth loop average fps of mesdksw is %.2f' % (z, msdkswFpsNum / z))
 			z += 1
@@ -247,7 +247,7 @@ def calculateFps():
 			resultLines = f.readlines()
 			fpsNumLine = resultLines[-2]
 			begin = fpsNumLine.rfind(', fps:')+6
-			msdkhwFpsNum += float(fpsNumLine[begin : begin + 8])
+			msdkhwFpsNum += float(fpsNumLine[begin : begin + 7])
 			f.close()
 			print('the %dth loop average fps of mesdkhw is %.2f' % (z, msdkhwFpsNum / hz))
 			hz += 1
@@ -277,6 +277,7 @@ calculateFps()
 averageHevcFps = hevcFpsNum / testNum
 averageFfmpegFps = ffmpegFpsNum / testNum 
 averageMsdkswFps = msdkswFpsNum / testNum
+averageMsdkhwFps = msdkhwFpsNum / testNum
 averageAvcFps = avcFpsNum / testNum
 averageMpeg2Fps = mpeg2FpsNum / testNum
 
