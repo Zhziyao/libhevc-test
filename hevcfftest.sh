@@ -4,7 +4,6 @@
 if [ -f hevcres.txt ]; then
 	echo ' former test res files exist and will be removed'
 	rm hevcres.txt
-	rm ffmpegres.txt
 fi
 
 #LIBHEVC TEST
@@ -73,8 +72,8 @@ fi
 
 #FFMPEG TEST
 echo "FFMPEG TEST"
-printf "./libhevctest.py -lib f -loop 5 " >>ffmpegres.txt
-./libhevctest.py -lib f -loop 5  >>ffmpegres.txt
+printf "./libhevctest.py -lib f -loop 5 " >>hevcres.txt
+./libhevctest.py -lib f -loop 5  >>hevcres.txt
 if [ $? -ne 0 ]; then
 	printf "last cmd run correctly"
 fi
@@ -82,8 +81,8 @@ fi
 
 #mediasdk
 echo "mediasdk TEST"
-printf "./libhevctest.py -lib sw5 -loop 5 " >>ffmpegres.txt
-./libhevctest.py -lib sw5 -loop 5  >>ffmpegres.txt
+printf "./libhevctest.py -lib sw5 -loop 5 " >>hevcres.txt
+./libhevctest.py -lib sw5 -loop 5  >>hevcres.txt
 if [ $? -ne 0 ]; then
 	printf "last cmd run correctly"
 fi
