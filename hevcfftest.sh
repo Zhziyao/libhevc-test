@@ -78,3 +78,12 @@ printf "./libhevctest.py -lib f -loop 5 " >>ffmpegres.txt
 if [ $? -ne 0 ]; then
 	printf "last cmd run correctly"
 fi
+
+
+#mediasdk
+echo "mediasdk TEST"
+printf "./libhevctest.py -lib sw5 -loop 5 " >>ffmpegres.txt
+./libhevctest.py -lib sw5 -loop 5  >>ffmpegres.txt
+if [ $? -ne 0 ]; then
+	printf "last cmd run correctly"
+fi
