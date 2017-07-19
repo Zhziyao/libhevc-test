@@ -39,7 +39,7 @@ libmpeg2TestParas = [ 'mpeg2decode -i', ' --arch X86_', ' --num_cores ',' --soc 
 libffmpegParas = ['ffmpeg -y -i ', 'decodetest/null.yuv']
 libmsdkParas = ['sample_decode ', ' h265 ', ' h264 ', ' -sw -i ', ' -hw -i ']
 testSaveDir = 'decodetest'
-testFile = ' jellyfish-10-mbps-hd-hevc.hevc '
+testFile = ' Colorbars.mpg '
 
 #cmd process
 def cmdProcess():
@@ -266,7 +266,7 @@ def calculateFps():
 			fpsNumLine = resultLines[-1]
 			mpeg2FpsNum += float(fpsNumLine[fpsNumLine.find(':')+2 : ])
 			f.close()
-			print('the %dth loop avergae fps of hevc is %.2f' % (x, hevcFpsNum / m2))
+			print('the %dth loop avergae fps of hevc is %.2f' % (x, mpeg2FpsNum / m2))
 			m2 += 1
 #main
 curDirPath = os.system('pwd')
