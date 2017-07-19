@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm hevcres.txt
+rm ffmpegres.txt
 
 #LIBHEVC TEST
 echo "hevcttest: -arc ssse3 core 1"
