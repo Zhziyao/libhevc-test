@@ -14,6 +14,7 @@ if [ $? -ne 0 ]; then
 	printf "last cmd run correctly"
 fi
 
+
 echo "avcttest: -arc ssse3 core 2"
 printf "./libavctest.py -lib a -loop 5 -core 2" >>avcres.txt
 ./libavctest.py -lib a -loop 5 -core 2 >>avcres.txt
