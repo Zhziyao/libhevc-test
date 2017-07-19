@@ -190,7 +190,7 @@ def createTestResult():
 		print testCmd
 		aj = 0
 		while aj < testNum:
-			testResFile = 'decodetest/'+'avcdecode' + str(j)+'.txt'
+			testResFile = 'decodetest/'+'avcdecode' + str(aj)+'.txt'
 			print('this is the %d test of libavc' % aj)
 			os.system('touch '+testResFile)
 			r = subprocess.Popen(testCmd, stdout=subprocess.PIPE, stderr = subprocess.PIPE,shell = True)
@@ -258,7 +258,7 @@ def calculateFps():
 			fpsNumLine = resultLines[-1]
 			avcFpsNum += float(fpsNumLine[fpsNumLine.find(':')+2 : ])
 			f.close()
-			print('the %dth loop avergae fps of hevc is %.2f' % (x, hevcFpsNum / ax))
+			print('the %dth loop avergae fps of hevc is %.2f' % (x, avcFpsNum / ax))
 			ax += 1
 		elif 'mpeg2decode' in file :
 			f = open('decodetest/' + file)
