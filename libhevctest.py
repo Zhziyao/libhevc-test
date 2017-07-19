@@ -39,7 +39,7 @@ libmpeg2TestParas = [ 'mpeg2decode -i' ' --arch X86_', ' --num_cores ',' --soc G
 libffmpegParas = ['ffmpeg -y -i ', 'decodetest/null.yuv']
 libmsdkParas = ['sample_decode ', ' h265 ', ' h264 ', ' -sw -i ', ' -hw -i ']
 testSaveDir = 'decodetest'
-testFile = ' cin.hevc '
+testFile = ' jellyfish-10-mbps-hd-hevc.hevc '
 
 #cmd process
 def cmdProcess():
