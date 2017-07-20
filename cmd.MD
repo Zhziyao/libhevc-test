@@ -22,4 +22,4 @@ ffmpeg -y -i  jellyfish-10-mbps-hd-hevc.hevc decodetest/null.yuv
 
 sample_decode  h265  -sw -i  jellyfish-10-mbps-hd-hevc.hevc 
 
-sample_decode  h265  -hw -i  jellyfish-10-mbps-hd-hevc.hevc
+sample_decode h265 -hw -i jellyfish-10-mbps-hd-hevc.hevc

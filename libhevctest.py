@@ -258,7 +258,7 @@ def calculateFps():
 			fpsNumLine = resultLines[-1]
 			avcFpsNum += float(fpsNumLine[fpsNumLine.find(':')+2 : ])
 			f.close()
-			print('the %dth loop avergae fps of hevc is %.2f' % (x, hevcFpsNum / ax))
+			print('the %dth loop avergae fps of avc is %.2f' % (x, hevcFpsNum / ax))
 			ax += 1
 		elif 'mpeg2decode' in file :
 			f = open('decodetest/' + file)
@@ -266,7 +266,7 @@ def calculateFps():
 			fpsNumLine = resultLines[-1]
 			mpeg2FpsNum += float(fpsNumLine[fpsNumLine.find(':')+2 : ])
 			f.close()
-			print('the %dth loop avergae fps of hevc is %.2f' % (x, hevcFpsNum / m2))
+			print('the %dth loop avergae fps of mpeg2 is %.2f' % (x, hevcFpsNum / m2))
 			m2 += 1
 #main
 curDirPath = os.system('pwd')
