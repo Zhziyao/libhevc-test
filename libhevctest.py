@@ -37,7 +37,7 @@ libhevcTestParas = ['./hevcdecode -i', ' --arch X86_', ' --num_cores ',' --soc G
 libavcTestParas = [ 'avcdecode -i', ' --arch X86_', ' --num_cores ',' --soc GENERIC --num_frames -1 -s 0']
 libmpeg2TestParas = [ 'mpeg2decode -i', ' --arch X86_', ' --num_cores ',' --soc GENERIC --num_frames -1 -s 0']
 libffmpegParas = ['ffmpeg -y -i ', 'decodetest/null.yuv']
-libmsdkParas = ['sample_decode ', ' h265 ', ' h264 ', ' -sw -i ', ' -hw -i ']
+libmsdkParas = ['sample_decode ', ' h265 ', ' h264 ', ' -sw -i ', ' -hw -i ', ' -p 15dd936825ad475ea34e35f3f54217a6 ']
 testSaveDir = 'decodetest'
 testFile = ' jellyfish-10-mbps-hd-hevc.hevc '
 
@@ -142,7 +142,7 @@ def createTestResult():
 	if libmediahw:
 		print 'get in libmsdk'
 		if h265test:
-			testCmd = libmsdkParas[0] + libmsdkParas[1] + libmsdkParas[4] + testFile
+			testCmd = libmsdkParas[0] + libmsdkParas[1] + libmsdkParas[4] + testFile + libmsdkParas[5]
 		elif h264test:
 			testCmd = libmsdkParas[0] + libmsdkParas[2] + libmsdkParas[4] + testFile
 		print testCmd
