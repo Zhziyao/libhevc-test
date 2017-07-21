@@ -23,6 +23,7 @@ libmediasw = False
 libmediahw = False
 libmpeg2 = False
 libavc = False
+mpeg2test = False
 testNum = 0
 coreNum = ''
 coreArc = ''
@@ -37,7 +38,7 @@ libhevcTestParas = ['./hevcdecode -i', ' --arch X86_', ' --num_cores ',' --soc G
 libavcTestParas = [ 'avcdecode -i', ' --arch X86_', ' --num_cores ',' --soc GENERIC --num_frames -1 -s 0']
 libmpeg2TestParas = [ 'mpeg2decode -i', ' --arch X86_', ' --num_cores ',' --soc GENERIC --num_frames -1 -s 0']
 libffmpegParas = ['ffmpeg -y -i ', 'decodetest/null.yuv']
-libmsdkParas = ['sample_decode ', ' h265 ', ' h264 ', ' -sw -i ', ' -hw -i ']
+libmsdkParas = ['sample_decode ', ' h265 ', ' h264 ', ' mpeg2 ', ' -sw -i ', ' -hw -i ']
 testSaveDir = 'decodetest'
 testFile = ' parkrun1920_23mbps.mpg '
 
@@ -54,6 +55,7 @@ def cmdProcess():
 	global libavc 
 	global h264test
 	global h265test
+	global mpeg2test
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-lib", "--libfortest", required = True,
 		help = "set the test libraries during the test")
@@ -80,6 +82,8 @@ def cmdProcess():
 		h264test = True
 	if '5' in args.libfortest:
 		h265test = True
+	if 'p' in args.libfortest:
+		mpeg2test = True
 	if args.testloop > 0:
 		testNum = args.testloop
 	if args.core_num:
@@ -124,9 +128,11 @@ def createTestResult():
 	if libmediasw:
 		print 'get in libmsdk'
 		if h265test:
-			testCmd = libmsdkParas[0] + libmsdkParas[1] + libmsdkParas[3] + testFile
+			testCmd = libmsdkParas[0] + libmsdkParas[1] + libmsdkParas[4] + testFile
 		elif h264test:
-			testCmd = libmsdkParas[0] + libmsdkParas[2] + libmsdkParas[3] + testFile
+			testCmd = libmsdkParas[0] + libmsdkParas[2] + libmsdkParas[4] + testFile
+		elif mpeg2test:
+			testCmd = libmsdkParas[0] + libmsdkParas[3] + libmsdkParas[4] + testFile
 		print testCmd
 		k = 0
 		while k < testNum:
@@ -142,9 +148,9 @@ def createTestResult():
 	if libmediahw:
 		print 'get in libmsdk'
 		if h265test:
-			testCmd = libmsdkParas[0] + libmsdkParas[1] + libmsdkParas[4] + testFile
+			testCmd = libmsdkParas[0] + libmsdkParas[1] + libmsdkParas[5] + testFile
 		elif h264test:
-			testCmd = libmsdkParas[0] + libmsdkParas[2] + libmsdkParas[4] + testFile
+			testCmd = libmsdkParas[0] + libmsdkParas[2] + libmsdkParas[5] + testFile
 		print testCmd
 		k = 0
 		while k < testNum:

@@ -77,3 +77,13 @@ printf "./libmpeg2test.py -lib f -loop 5 " >>mpeg2.txt
 if [ $? -ne 0 ]; then
 	printf "last cmd run correctly"
 fi
+
+#mediasdk
+#
+
+echo "MEDIASDK"
+printf "./libmpeg2test.py -lib sp -loop 5" >>mpeg2.txt
+./libmpeg2test.py -lib sp -loop 5  >>mpeg2.txt
+if [ $? -ne 0 ]; then
+	printf "last cmd run correctly"
+fi
